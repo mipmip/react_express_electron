@@ -2,6 +2,8 @@ const { app, BrowserWindow } = require("electron");
 const path = require("path");
 const isDev = process.env.NODE_ENV === "development";
 
+//const cors = require("cors");
+
 let mainWindow;
 
 const createWindow = () => {

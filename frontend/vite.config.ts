@@ -7,4 +7,5 @@ export default defineConfig({
   build: {
     outDir: "../dist/frontend", // Output Vite build files to the dist directory
   },
+  base: "./", // the electron app will be able to find the assets
 });
