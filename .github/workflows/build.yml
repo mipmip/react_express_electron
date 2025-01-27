@@ -47,6 +47,8 @@ jobs:
       # Build the app
       - name: Build Electron App
         run: npm run build
+        env:
+          GITHUB_TOKEN: ${{ secrets.ELECTRON_BUILD_TOKEN }} # Required for electron-builder
 
       # Upload build artifacts
       - name: Upload Artifacts

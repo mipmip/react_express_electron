@@ -46,20 +46,17 @@
       "target": [
         "nsis",
         "portable"
-      ],
-      "publish": []
+      ]
     },
     "mac": {
-      "target": "dmg",
-      "publish": []
+      "target": "dmg"
     },
     "linux": {
       "target": [
         "AppImage",
         "deb",
         "rpm"
-      ],
-      "publish": []
+      ]
     }
   }
 }
