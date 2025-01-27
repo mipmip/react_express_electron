@@ -50,7 +50,7 @@ jobs:
       - name: Build Electron App
         run: npm run build
         env:
-          GITHUB_TOKEN: ${{ secrets.ELECTRON_BUILD_TOKEN }} # Required for electron-builder
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Required for electron-builder
 
 
       # - name: Create Release and Upload Assets
@@ -60,7 +60,7 @@ jobs:
       #       dist/*.exe
       #       dist/*.dmg
       #       dist/*.AppImage
-      #     token: ${{ secrets.ELECTRON_BUILD_TOKEN }}
+      #     token: ${{ secrets.GITHUB_TOKEN }}
       #   env:
       #     GITHUB_TOKEN: ${{ secrets.ELECTRON_BUILD_TOKEN }}
 
