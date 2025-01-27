@@ -52,16 +52,17 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.ELECTRON_BUILD_TOKEN }} # Required for electron-builder
 
-      - name: Create Release and Upload Assets
-        uses: softprops/action-gh-release@v1
-        with:
-          files: |
-            dist/*.exe
-            dist/*.dmg
-            dist/*.AppImage
-          token: ${{ secrets.ELECTRON_BUILD_TOKEN }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.ELECTRON_BUILD_TOKEN }}
+
+      # - name: Create Release and Upload Assets
+      #   uses: softprops/action-gh-release@v1
+      #   with:
+      #     files: |
+      #       dist/*.exe
+      #       dist/*.dmg
+      #       dist/*.AppImage
+      #     token: ${{ secrets.ELECTRON_BUILD_TOKEN }}
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.ELECTRON_BUILD_TOKEN }}
 
       # # Upload build artifacts
       # - name: Upload Artifacts
