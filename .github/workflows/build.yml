@@ -9,7 +9,7 @@ on:
       - master
 
 jobs:
-  build:
+  release:
     strategy:
       matrix:
         os: [macos-latest, windows-latest, ubuntu-latest]
