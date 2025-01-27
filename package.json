@@ -48,9 +48,6 @@
         "portable"
       ]
     },
-    "mac": {
-      "target": "dmg"
-    },
     "linux": {
       "target": [
         "AppImage",
