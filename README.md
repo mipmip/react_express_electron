@@ -29,3 +29,7 @@ Installers will be generated in the `dist` folder.
 ## Known Issues
 
 - The github action that's supposed to build the installers, builds a broken `.dmg` file, due to it not being signed.
+
+### GitHub Action
+
+The action triggers on a new tag created with the format `v*.*.*`. It will build the installers and upload them as release assets.
