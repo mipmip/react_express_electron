@@ -33,3 +33,8 @@ Installers will be generated in the `dist` folder.
 ### GitHub Action
 
 The action triggers on a new tag created with the format `v*.*.*`. It will build the installers and upload them as release assets.
+
+```
+git tag v1.0.0  # Create a new tag
+git push origin v1.0.0  # Push the tag to GitHub
+```

@@ -59,9 +59,9 @@ jobs:
             dist/*.exe
             dist/*.dmg
             dist/*.AppImage
-        #   token: ${{ secrets.ELECTRON_BUILD_TOKEN }}
-        # env:
-        #   GITHUB_TOKEN: ${{ secrets.ELECTRON_BUILD_TOKEN }}
+          token: ${{ secrets.ELECTRON_BUILD_TOKEN }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.ELECTRON_BUILD_TOKEN }}
 
       # # Upload build artifacts
       # - name: Upload Artifacts
