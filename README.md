@@ -9,9 +9,9 @@ The build will generate a standalone desktop application that can be run on Wind
 1. Clone the repository
 2. Run `npm install` to install the dependencies
 3. `cd frontend` and run `npm install` to install the frontend dependencies
-4. `cd ..` to go back to the root directory
+4. You may need to run `npm run build` in the `frontend` folder to build the frontend.
 5. Run `npm run dev` to start the development server
-6. React app will be running on [http://localhost:3000](http://localhost:3000)
+6. React app will be running on [http://localhost:5173](http://localhost:5173)
 
 ## Building the Installers
 

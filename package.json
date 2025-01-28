@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\" \"npm run dev:electron\"",
     "dev:frontend": "cd frontend && vite",
-    "dev:backend": "node backend/server.js",
+    "dev:backend": "nodemon backend/server.js",
     "dev:electron": "cross-env NODE_ENV=development electron .",
     "build": "npm run build:frontend && electron-builder",
     "build:frontend": "cd frontend && npm run build"
@@ -15,7 +15,9 @@
   "author": "Roy Russo <royrusso@gmail.com> (https://royrusso.com)",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.21.2",
+    "nodemon": "^3.1.9",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
@@ -26,6 +28,7 @@
     "concurrently": "^9.1.2",
     "electron": "^25.3.0",
     "electron-builder": "^24.6.0",
+    "vite": "^6.0.11",
     "webpack": "^5.97.1",
     "webpack-cli": "^6.0.1"
   },
@@ -40,7 +43,8 @@
     "files": [
       "dist/**/*",
       "electron/**/*",
-      "backend/**/*"
+      "backend/**/*",
+      "backend/server.js"
     ],
     "extraMetadata": {
       "main": "electron/main.js"
