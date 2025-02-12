@@ -1,8 +1,12 @@
-# Electron + Vite + React + Express
+# New Quiqr Desktop Home
 
-This is a template for building a desktop application using Electron, Vite, React, and Express. It is a full-stack application that uses Electron to run the React frontend and Express backend. The frontend is built using Vite, and the backend is built using Express.
+This is a template for building a desktop application using Electron, Vite,
+React, and Express. It is a full-stack application that uses Electron to run
+the React frontend and Express backend. The frontend is built using Vite, and
+the backend is built using Express.
 
-The build will generate a standalone desktop application that can be run on Windows, macOS, and Linux.
+The build will generate a standalone desktop application that can be run on
+Windows, macOS, and Linux.
 
 ## Running Locally
 
