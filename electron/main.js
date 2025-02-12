@@ -1,7 +1,7 @@
 const { app, BrowserWindow } = require("electron");
 const path = require("path");
 const isDev = process.env.NODE_ENV === "development";
-//const backend = require("../backend/server");
+const backend = require("../backend/server");
 
 //const cors = require("cors");
 
@@ -29,8 +29,8 @@ const createWindow = () => {
 };
 
 app.on("ready", () => {
+  backend.startServer();
   createWindow();
-  //backend.startServer();
 });
 
 app.on("window-all-closed", () => {
