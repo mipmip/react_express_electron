@@ -5,9 +5,12 @@
   "main": "electron/main.js",
   "scripts": {
     "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\" \"npm run dev:electron\"",
+    "dev2": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\" \"npm run dev:electron\"",
+    "dev:react": "cross-env APP_ENV=development BROWSERSLIST_IGNORE_OLD_DATA=true BROWSER=none PORT=4001 react-scripts start",
     "dev:frontend": "cd frontend && vite",
     "dev:electron": "cross-env NODE_ENV=development electron .",
     "build": "npm run build:frontend && electron-builder",
+    "build:react": "cross-env BROWSERSLIST_IGNORE_OLD_DATA=true react-scripts build",
     "build:frontend": "cd frontend && npm run build"
   },
   "keywords": [],
