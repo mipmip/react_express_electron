@@ -1,7 +1,7 @@
 const { app, BrowserWindow } = require("electron");
 const path = require("path");
 const isDev = process.env.NODE_ENV === "development";
-const backend = require("../backend/server");
+//const backend = require("../backend/server");
 
 //const cors = require("cors");
 
@@ -18,7 +18,7 @@ const createWindow = () => {
   });
 
   if (isDev) {
-    mainWindow.loadURL("http://localhost:3000"); // For development
+    mainWindow.loadURL("http://localhost:5173"); // For development
   } else {
     mainWindow.loadFile(path.join(__dirname, "../dist/frontend/index.html")); // For production
   }

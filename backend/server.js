@@ -19,7 +19,7 @@ app.get("/api/message", (req, res) => {
 
   const response = {};
   let msg = "";
-  exec("sudo which nmap", (error, stdout, stderr) => {
+  exec("which nix", (error, stdout, stderr) => {
     if (error) {
       msg = error.message;
       console.error(`Error: ${error.message}`);
@@ -31,11 +31,11 @@ app.get("/api/message", (req, res) => {
       return;
     }
     if (stdout.trim()) {
-      msg = `Path to nmap: ${stdout.trim()}`;
-      console.log(`Path to nmap: ${stdout.trim()}`);
+      msg = `Path to nix: ${stdout.trim()}`;
+      console.log(`Path to nix: ${stdout.trim()}`);
     } else {
-      msg = "nmap is not installed or not in PATH.";
-      console.log("nmap is not installed or not in PATH.");
+      msg = "nix is not installed or not in PATH.";
+      console.log("nix is not installed or not in PATH.");
     }
     res.json({ message: msg });
   });
