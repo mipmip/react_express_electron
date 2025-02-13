@@ -15,6 +15,7 @@ service.api.readConfKey('prefs').then((value)=>{
   /* STYLES FOR OTHER THEN MUI COMPONENTS */
   require('./app-ui-styles/components.css');
 });
+console.log("joehoe")
 
 ReactDOM.render(
   <BrowserRouter>

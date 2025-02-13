@@ -80,6 +80,7 @@ class App extends React.Component{
 
   componentDidMount(){
 
+
     this._ismounted = true;
 
     this.setThemeStyleFromPrefs();
@@ -254,12 +255,6 @@ class App extends React.Component{
   renderMenuSwitch(){
     return (<Switch>
 
-
-      <Route path="/" exact={true} render={ ({match, history})=> {
-        return (
-          <SiteLibrarySidebar />
-        );
-      }} />
       <Route path="/sites" exact={true} render={ ({match, history})=> {
         return (
           <SiteLibrarySidebar />
@@ -289,6 +284,11 @@ class App extends React.Component{
         />);
       }} />
 
+      <Route path="*" exact={true} render={ ({match, history})=> {
+        return (
+          <SiteLibrarySidebar />
+        );
+      }} />
 
     </Switch>);
   }
@@ -513,6 +513,7 @@ class App extends React.Component{
         this.history = history;
         return (
           <ThemeProvider theme={this.state.theme}>
+            <div/>
           </ThemeProvider>
         )
         }} />
@@ -554,6 +555,11 @@ class App extends React.Component{
         }} />
 
       <Route path="/prefs" exact={false} render={ ({match, history})=> {
+          this.history = history;
+          return this.renderBodyWithToolbars()
+        }} />
+
+      <Route path="*" render={ ({match, history})=> {
           this.history = history;
           return this.renderBodyWithToolbars()
         }} />

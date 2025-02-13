@@ -39,8 +39,14 @@ jobs:
 
       # Step 4: Build the frontend
       - name: Build the frontend
+        env:
+          SKIP_PREFLIGHT_CHECK: true
+          NODE_OPTIONS: --openssl-legacy-provider
         working-directory: ./frontend
-        run: npm run build
+        run:
+          - npm run build
+          - mkdir -p ../dist/frontend
+          - rsync -av ./build/ ../dist/frontend/
 
       # Install dependencies
       - name: Install dependencies

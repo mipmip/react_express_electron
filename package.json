@@ -1,10 +1,12 @@
 {
+  "homepage": "./",
   "name": "react_express_electron",
   "version": "1.0.0",
   "description": "Sandbox repo for a react frontend, node backend, packaged as an electron app.",
   "main": "electron/main.js",
   "scripts": {
     "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\" \"npm run dev:electron\"",
+    "dev2": "concurrently  \"npm run dev:backend\" \"npm run dev:electron\"",
     "dev:react": "cross-env APP_ENV=development BROWSERSLIST_IGNORE_OLD_DATA=true BROWSER=none PORT=4001 react-scripts start",
     "dev:frontend": "cd frontend && SKIP_PREFLIGHT_CHECK=true NODE_OPTIONS=--openssl-legacy-provider npm run dev",
     "dev:frontend-old": "cd frontend && vite",
@@ -45,6 +47,7 @@
     },
     "files": [
       "dist/**/*",
+      "frontend/build/**/*",
       "electron/**/*",
       "backend/**/*",
       "backend/server.js"
