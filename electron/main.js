@@ -3,10 +3,8 @@ const path = require("path");
 const isDev = process.env.NODE_ENV === "development";
 const backend = require("../backend/server");
 const fs = require('fs-extra')
-//const url = require('url')
 const url = require('node:url');
 const QuiqrAppConfig    = require('../backend/src-main/app-prefs-state/quiqr-app-config');
-//const cors = require("cors");
 const mainWindowManager = require('./ui-managers/main-window-manager');
 const menuManager       = require('./ui-managers/menu-manager');
 const outputConsole     = require('../backend/src-main/logger/output-console');
@@ -15,9 +13,6 @@ const apiMain = require('../backend/src-main/bridge/api-main');
 
 let pogoconf = QuiqrAppConfig();
 global.pogoconf = pogoconf;
-
-
-
 
 global.outputConsole = outputConsole;
 global.currentSiteKey = pogoconf.lastOpenedSite.siteKey;

@@ -81,7 +81,7 @@ function getLocation(){
 
 }
 
-function getLocation2(locPath = ''){
+function getLocationOLD(locPath = ''){
 
   if(process.env.REACT_DEV_URL){
     //DEVELOPMENT SERVER
@@ -167,7 +167,7 @@ function getFirstScreenAfterStartup(){
   });
 }
 
-const createWindow2 = () => {
+const createWindowOLD = () => {
   mainWindow = new BrowserWindow({
     width: 1024,
     height: 764,
@@ -208,7 +208,6 @@ const createWindow2 = () => {
     mainWindow.webContents.once('dom-ready', () => {
       mainWindow.webContents.send("redirectToGivenLocation", '/sites');
     });
-
   }
 
   mainWindow.on("closed", () => {

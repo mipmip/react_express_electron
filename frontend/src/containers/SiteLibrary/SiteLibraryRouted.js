@@ -68,12 +68,9 @@ class SiteLibraryRouted extends React.Component{
     });
     */
 
-    //PORTQUIQR
-    /*
     service.api.readConfPrefKey('sitesListingView').then((view)=>{
       this.setState({sitesListingView: view });
     });
-    */
 
   }
 

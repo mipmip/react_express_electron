@@ -6,7 +6,6 @@
 - [x] Run old React code base
 - [x] combine with new server
 - [x] get static routing working
-- [ ] build together as app
 
 - crippled main-process-bridge
 - removed require.electron for net object (template browser)
@@ -23,4 +22,16 @@ open url: http://localhost:4001/sites
 
 ## M2 Backend service via http
 
-- [ ] port api to be used as http server
+- [x] port api to be used as http server
+
+## M3 Mount sites
+
+- [ ] mount sites and get forms working
+
+
+
+
+
+## Long list of small and large todo's
+
+- [ ] templates gallery not working

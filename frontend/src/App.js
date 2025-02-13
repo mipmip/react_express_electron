@@ -89,9 +89,7 @@ class App extends React.Component{
       this.setState({libraryView: view });
     });
 
-    //PORTQUIQR
     service.api.readConfPrefKey('showSplashAtStartup').then((show)=>{
-      console.log(show)
       if(typeof show == 'undefined'){
         show=true;
       }

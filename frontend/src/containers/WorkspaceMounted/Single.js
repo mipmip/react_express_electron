@@ -15,10 +15,13 @@ class Single extends React.Component{
   }
 
   componentDidMount(){
+
+    /* PORTQUIQR
     window.require('electron').ipcRenderer.on('frontEndBusy', ()=>{
       this.setState({showSpinner: true});
     });
     service.registerListener(this);
+    */
 
     var stateUpdate  = {};
 

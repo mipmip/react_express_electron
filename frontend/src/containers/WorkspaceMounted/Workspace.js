@@ -27,32 +27,37 @@ class WorkSpace extends React.Component{
   constructor(props){
     super(props);
 
-    let win = window.require('electron').remote.getCurrentWindow();
+    //PORTQUIQR
+    //let win = window.require('electron').remote.getCurrentWindow();
 
     this.state = {
       site: null,
       workspace: null,
       error: null,
-      maximized:win.isMaximized(),
+      //maximized:win.isMaximized(),
       style: style,
       menuIsLocked: true,
       forceShowMenu: false,
       skipMenuTransition: false,
     };
 
+    /*
     win.on('maximize', () => { this.setState({maximized: true}); });
     win.on('unmaximize', ()=>{ this.setState({maximized: false}); });
     window.state = this.state;
+    */
   }
 
   componentDidMount(){
 
     this._ismounted = true;
 
+    /* PORTQUIQR
     window.require('electron').ipcRenderer.on('frontEndBusy', ()=>{
       this.setState({showEmpty: true});
     });
     service.registerListener(this);
+    */
 
     this.refresh();
     this.setThemeStyleFromPrefs();

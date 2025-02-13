@@ -21,10 +21,12 @@ class WorkspaceSidebar extends React.Component{
   }
 
   componentDidMount(){
+    /* PORTQUIQR
     window.require('electron').ipcRenderer.on('frontEndBusy', ()=>{
       this.setState({showEmpty: true});
     });
     service.registerListener(this);
+    */
 
     this._ismounted = true;
     this.refresh();

@@ -240,11 +240,13 @@ class Collection extends React.Component{
 
   componentDidMount(){
 
+    /* PORTQUIQR
     window.require('electron').ipcRenderer.on('frontEndBusy', ()=>{
       this.setState({showSpinner: true});
     });
 
     service.registerListener(this);
+    */
     service.api.getLanguages(this.props.siteKey, this.props.workspaceKey).then((langs)=>{
       this.setState({languages:langs})
       //this.forceUpdate();
