@@ -43,10 +43,7 @@ jobs:
           SKIP_PREFLIGHT_CHECK: true
           NODE_OPTIONS: --openssl-legacy-provider
         working-directory: ./frontend
-        run:
-          - npm run build
-          - mkdir -p ../dist/frontend
-          - rsync -av ./build/ ../dist/frontend/
+        run: npm run build && mkdir -p ../dist/frontend && rsync -av ./build/ ../dist/frontend/
 
       # Install dependencies
       - name: Install dependencies
