@@ -85,17 +85,17 @@ class MainProcessBridge{
 
   request( method, data, opts = {timeout:10000}){
     let _reject;
-    let promise = new Promise(function(resolve, reject){
+    let promise = new Promise((resolve, reject)=>{
       _reject = reject;
 
       //this.ipcRenderer.send('message', {data, token, handler:method});
       resolve({data:1});
 
-    }.bind(this));
+    });
 
-    promise.forceAbort = function(){
+    promise.forceAbort = ()=>{
       _reject('Cancelled');
-    }.bind(this);
+    };
 
     return promise;
 
