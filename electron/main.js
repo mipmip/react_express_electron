@@ -18,7 +18,7 @@ const createWindow = () => {
   });
 
   if (isDev) {
-    mainWindow.loadURL("http://localhost:5173"); // For development
+    mainWindow.loadURL("http://localhost:4001/sites"); // For development
   } else {
     mainWindow.loadFile(path.join(__dirname, "../dist/frontend/index.html")); // For production
   }

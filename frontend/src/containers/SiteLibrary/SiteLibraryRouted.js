@@ -61,14 +61,19 @@ class SiteLibraryRouted extends React.Component{
 
     service.api.stopHugoServer();
 
-    window.require('electron').ipcRenderer.on('frontEndBusy', ()=>{
+    //PORTQUIQR
+    /*
+      window.require('electron').ipcRenderer.on('frontEndBusy', ()=>{
       this.setState({showSpinner: true});
     });
+    */
 
-
+    //PORTQUIQR
+    /*
     service.api.readConfPrefKey('sitesListingView').then((view)=>{
       this.setState({sitesListingView: view });
     });
+    */
 
   }
 
@@ -296,7 +301,7 @@ class SiteLibraryRouted extends React.Component{
       return <Spinner />
     }
 
-    let listingSource
+    let listingSource = '';
     let listTitle = '';
     let sites = [];
 
