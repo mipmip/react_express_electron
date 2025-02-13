@@ -114,7 +114,6 @@ class SiteLibraryRouted extends React.Component{
     let localsites = [];
     service.getConfigurations(true).then((c)=>{
 
-      console.log(c)
       c.sites.forEach((site) =>{
         localsites.push(site.name);
       });

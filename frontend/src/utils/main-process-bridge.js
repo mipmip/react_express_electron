@@ -86,22 +86,23 @@ class MainProcessBridge{
   }
 
   request( method, data, opts = {timeout:10000}){
-    console.log(method);
+    //console.log(method);
     let _reject;
     let promise = new Promise((resolve, reject)=>{
       _reject = reject;
 
-    axios
-      .post("http://localhost:5150/api/"+method, {
-        data: data,
-      })
-      .then((response) => {
-        resolve(response.data);
-      })
-      .catch((error) => console.error("Error sending data:", error));
+      axios
+        .post("http://localhost:5150/api/"+method, {
+          data: data,
+        })
+        .then((response) => {
+          //console.log(response.data)
+          resolve(response.data);
+        })
+        .catch((error) => console.error("Error sending data:", error));
 
-      //this.ipcRenderer.send('message', {data, token, handler:method});
-      //resolve({data:1});
+        //this.ipcRenderer.send('message', {data, token, handler:method});
+        //resolve({data:1});
 
     });
 

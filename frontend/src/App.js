@@ -90,7 +90,6 @@ class App extends React.Component{
     });
 
     //PORTQUIQR
-    /*
     service.api.readConfPrefKey('showSplashAtStartup').then((show)=>{
       console.log(show)
       if(typeof show == 'undefined'){
@@ -101,7 +100,6 @@ class App extends React.Component{
         showSplashAtStartup: show,
       });
     });
-    */
 
     //PORTQUIQR
     /*

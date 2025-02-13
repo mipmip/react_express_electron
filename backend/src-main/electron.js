@@ -2,7 +2,6 @@ const electron          = require('electron')
 const unhandled         = require('electron-unhandled');
 const mainWindowManager = require('./ui-managers/main-window-manager');
 const menuManager       = require('./ui-managers/menu-manager');
-const QuiqrAppConfig    = require('./app-prefs-state/quiqr-app-config');
 const outputConsole     = require('./logger/output-console');
 
 const ipcMainBinder     = require('./bridge/ipc-main-binder');
@@ -24,8 +23,9 @@ app.setAsDefaultProtocolClient('quiqr');
 
 require('events').EventEmitter.prototype._maxListeners = 25;
 
-let pogoconf = QuiqrAppConfig();
-global.pogoconf = pogoconf;
+let pogoconf = QuiqrAppConfig(); ///
+global.pogoconf = pogoconf; ///
+
 global.outputConsole = outputConsole;
 global.currentSiteKey = pogoconf.lastOpenedSite.siteKey;
 global.currentSitePath = pogoconf.lastOpenedSite.sitePath;
@@ -39,11 +39,11 @@ global.currentWorkspaceKey = pogoconf.lastOpenedSite.workspaceKey;
 global.skipWelcomeScreen = pogoconf.skipWelcomeScreen;
 global.hugoServer = undefined;
 global.currentServerProccess = undefined;
-global.mainWM = mainWindowManager;
 global.logWindow;
 global.apiMain = apiMain;
 global.modelDirWatcher = undefined;
 
+global.mainWM = mainWindowManager;
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;

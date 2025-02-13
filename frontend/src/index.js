@@ -7,7 +7,6 @@ import SnackbarManager   from './components/SnackbarManager';
 
 service.api.readConfKey('prefs').then((value)=>{
 
-  console.log(value);
   let appUiStyle = 'quiqr10';
 
   require('./app-ui-styles/' + appUiStyle + '/css/index.css');

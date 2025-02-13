@@ -5,68 +5,51 @@ const backend = require("../backend/server");
 const fs = require('fs-extra')
 //const url = require('url')
 const url = require('node:url');
+const QuiqrAppConfig    = require('../backend/src-main/app-prefs-state/quiqr-app-config');
 //const cors = require("cors");
+const mainWindowManager = require('./ui-managers/main-window-manager');
+const menuManager       = require('./ui-managers/menu-manager');
+const outputConsole     = require('../backend/src-main/logger/output-console');
 
+const apiMain = require('../backend/src-main/bridge/api-main');
+
+let pogoconf = QuiqrAppConfig();
+global.pogoconf = pogoconf;
+
+
+
+
+global.outputConsole = outputConsole;
+global.currentSiteKey = pogoconf.lastOpenedSite.siteKey;
+global.currentSitePath = pogoconf.lastOpenedSite.sitePath;
+global.currentBaseUrl = "";
+
+global.currentFormShouldReload = undefined;
+global.currentFormNodePath = undefined;
+global.currentFormAccordionIndex = undefined;
+
+global.currentWorkspaceKey = pogoconf.lastOpenedSite.workspaceKey;
+global.skipWelcomeScreen = pogoconf.skipWelcomeScreen;
+global.hugoServer = undefined;
+global.currentServerProccess = undefined;
+global.logWindow;
+global.apiMain = apiMain;
+global.modelDirWatcher = undefined;
+
+global.mainWM = mainWindowManager;
 let mainWindow;
 
-const createWindow = () => {
-  mainWindow = new BrowserWindow({
-    width: 1024,
-    height: 764,
-    webPreferences: {
-      nodeIntegration: true,
-      contextIsolation: false,
-    },
-  });
-
-  if (isDev) {
-    mainWindow.loadURL("http://localhost:4001"); // For development
-  } else {
-
-    //LOOKING FOR INDEX.HTML
-    let lookups = [
-      path.join(__dirname, "../dist/frontend/index.html"),
-      path.normalize(path.join(__dirname, '/../../index.html')), //works in production
-      path.normalize(path.join(__dirname, '../frontend/build/index.html')), //works in development after react_build
-    ];
-
-
-    let indexFile = null;
-    for(let i=0; i < lookups.length; i++){
-      let lookup = lookups[i];
-      if(fs.existsSync(lookup)){
-        indexFile = lookup;
-        break;
-      }
-    }
-
-    console.log(indexFile)
-
-    /*
-    let lUrl = new URL(indexFile);
-    lUrl.protocol = 'file';
-    lUrl.slashes = true;
-    */
-    //mainWindow.loadURL("file://"+indexFile);
-    let myUrl = url.format(
-        { pathname: indexFile, protocol: 'file:', slashes: true });
-
-    mainWindow.loadURL(myUrl);
-
-    mainWindow.webContents.once('dom-ready', () => {
-      mainWindow.webContents.send("redirectToGivenLocation", '/sites');
-    });
-
-  }
-
-  mainWindow.on("closed", () => {
-    mainWindow = null;
-  });
-};
+function createWindow () {
+  mainWindow = global.mainWM.getCurrentInstanceOrNew();
+  mainWindow.on('closed', function () {
+    mainWindow = null
+  })
+}
 
 app.on("ready", () => {
   backend.startServer();
   createWindow();
+  menuManager.createMainMenu();
 });
 
 app.on("window-all-closed", () => {

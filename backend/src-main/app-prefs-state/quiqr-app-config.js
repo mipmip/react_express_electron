@@ -12,6 +12,7 @@ module.exports = function (options) {
     file: 'quiqr-app-config.json',
     path: app.getPath('userData')
   }, options);
+  //console.log(config)
   const fullStoreFileName = path.join(config.path, config.file);
 
   function resetStateToDefault() {
