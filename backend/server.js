@@ -6,12 +6,6 @@ const { exec } = require("child_process");
 const app = express();
 
 const startServer = () => {
-  /*
-  const PORT = process.env.PORT || 5000;
-  app.listen(PORT, () => {
-    console.log(`Express server is running on http://localhost:${PORT}`);
-  });
-  */
 
   app.use(cors());
   app.use(express.json());
@@ -56,9 +50,11 @@ const startServer = () => {
   });
 
   // Catch-all route to serve the React app
+  /*
   app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "../dist/frontend/index.html"));
   });
+  */
 
   const PORT = 5150;
   app.listen(PORT, () => {
