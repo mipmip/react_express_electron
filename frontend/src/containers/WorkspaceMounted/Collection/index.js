@@ -245,8 +245,8 @@ class Collection extends React.Component{
       this.setState({showSpinner: true});
     });
 
-    service.registerListener(this);
     */
+    service.registerListener(this);
     service.api.getLanguages(this.props.siteKey, this.props.workspaceKey).then((langs)=>{
       this.setState({languages:langs})
       //this.forceUpdate();
@@ -262,10 +262,12 @@ class Collection extends React.Component{
       Promise.all([
         service.api.listCollectionItems(siteKey, workspaceKey, collectionKey).then((items)=>{
           stateUpdate.items = items;
+          service.api.logToConsole(items)
           stateUpdate = { ...stateUpdate, ...(this.resolveFilteredItems(items)) };
 
         }),
         service.api.getWorkspaceDetails(siteKey, workspaceKey).then((workspaceDetails)=>{
+
           stateUpdate.selectedWorkspaceDetails = workspaceDetails;
         })
       ]).then(()=>{

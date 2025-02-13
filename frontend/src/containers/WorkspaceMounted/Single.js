@@ -20,9 +20,9 @@ class Single extends React.Component{
     window.require('electron').ipcRenderer.on('frontEndBusy', ()=>{
       this.setState({showSpinner: true});
     });
-    service.registerListener(this);
     */
 
+    service.registerListener(this);
     var stateUpdate  = {};
 
     //fileOverride is used for some dynamic dogFood editors

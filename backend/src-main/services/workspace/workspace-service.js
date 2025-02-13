@@ -359,6 +359,8 @@ class WorkspaceService{
       }
       */
 
+    console.log('tothier')
+
       let files = await globJob(globExpression, {});
       let retFiles = files.map(function(item){
 

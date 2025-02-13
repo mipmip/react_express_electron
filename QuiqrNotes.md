@@ -26,12 +26,17 @@ open url: http://localhost:4001/sites
 
 ## M3 Mount sites
 
-- [ ] mount sites and get forms working
-
-
-
-
+- [x] mount sites and get forms working
 
 ## Long list of small and large todo's
 
+- [ ] background jobs not working
+- [ ] collections not working
+- [ ] top iconbar actions not working
+- [ ] electron progress popup not correctly visible
 - [ ] templates gallery not working
+- [ ] ugly red warning at electron startup
+- [ ] pipeline build failing
+- [ ] log Window not working
+- [ ] menu-> File->select sites not working
+- [ ] repo should be renamed
