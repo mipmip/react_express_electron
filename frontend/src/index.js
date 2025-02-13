@@ -7,6 +7,7 @@ import SnackbarManager   from './components/SnackbarManager';
 
 service.api.readConfKey('prefs').then((value)=>{
 
+  console.log(value);
   let appUiStyle = 'quiqr10';
 
   require('./app-ui-styles/' + appUiStyle + '/css/index.css');
@@ -15,7 +16,6 @@ service.api.readConfKey('prefs').then((value)=>{
   /* STYLES FOR OTHER THEN MUI COMPONENTS */
   require('./app-ui-styles/components.css');
 });
-console.log("joehoe")
 
 ReactDOM.render(
   <BrowserRouter>

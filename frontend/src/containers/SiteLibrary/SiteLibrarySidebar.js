@@ -22,6 +22,9 @@ export class SiteLibrarySidebar extends React.Component {
     let tags = [];
     service.getConfigurations(true).then((c)=>{
 
+      console.log(c)
+      return
+
       c.sites.forEach((site)=>{
         if(site.tags){
           site.tags.forEach((t)=>{

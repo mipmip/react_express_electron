@@ -1,6 +1,6 @@
 const { app, BrowserWindow } = require("electron");
 const path = require("path");
-const isDev = process.env.NODE_ENV === "developmentx";
+const isDev = process.env.NODE_ENV === "development";
 const backend = require("../backend/server");
 const fs = require('fs-extra')
 //const url = require('url')
@@ -11,8 +11,8 @@ let mainWindow;
 
 const createWindow = () => {
   mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 1024,
+    height: 764,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
@@ -20,7 +20,7 @@ const createWindow = () => {
   });
 
   if (isDev) {
-    mainWindow.loadURL("http://localhost:4001/sites"); // For development
+    mainWindow.loadURL("http://localhost:4001"); // For development
   } else {
 
     //LOOKING FOR INDEX.HTML

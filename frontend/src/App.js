@@ -89,7 +89,10 @@ class App extends React.Component{
       this.setState({libraryView: view });
     });
 
+    //PORTQUIQR
+    /*
     service.api.readConfPrefKey('showSplashAtStartup').then((show)=>{
+      console.log(show)
       if(typeof show == 'undefined'){
         show=true;
       }
@@ -98,7 +101,9 @@ class App extends React.Component{
         showSplashAtStartup: show,
       });
     });
+    */
 
+    //PORTQUIQR
     /*
     window.require('electron').ipcRenderer.on('openSplashDialog', ()=>{this.setState({splashDialogOpen: true})});
     window.require('electron').ipcRenderer.on('importSiteDialogOpen', ()=>{this.setState({importSiteDialogOpen: true})});
