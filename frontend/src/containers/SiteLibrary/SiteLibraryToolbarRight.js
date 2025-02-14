@@ -1,6 +1,5 @@
 import * as React                                                 from 'react';
 import { Route }                                                  from 'react-router-dom';
-import service                                                    from './../../services/service';
 import {TopToolbarRight, ToolbarButton, ToolbarToggleButtonGroup} from '../TopToolbarRight'
 import AppsIcon                                                   from '@material-ui/icons/Apps';
 import SettingsApplicationsIcon                                   from '@material-ui/icons/SettingsApplications';
@@ -9,37 +8,28 @@ import AddIcon                                                    from '@materia
 import ViewListIcon                                               from '@material-ui/icons/ViewList';
 import ViewModuleIcon                                             from '@material-ui/icons/ViewModule';
 
-
 export class SiteLibraryToolbarRight extends React.Component {
-  constructor(props){
-    super(props);
-    this.state = {
-    }
-  }
 
   render(){
     return <Route render={({history})=>{ return this.renderWithRoute(history) }} />
   }
 
-  renderWithRoute(history: {push:(path: string)=>void}){
+  renderWithRoute(history){
 
     const leftButtons = [
       <ToolbarButton
         key="buttonNewSite"
         action={()=>{
           this.props.handleLibraryDialogClick('newSiteDialog')
-          //service.api.redirectTo(`/sites/new-site/x${Math.random()}`, true);
         }}
         title="New"
         icon={AddIcon}
       />,
 
-
       <ToolbarButton
         key="buttonImportSite"
         action={()=>{
           this.props.handleLibraryDialogClick('importSiteDialog')
-          //service.api.redirectTo(`/sites/import-site/x${Math.random()}`, true);
         }}
         title="Import"
         icon={InputIcon}
@@ -70,7 +60,7 @@ export class SiteLibraryToolbarRight extends React.Component {
         key={"toolbarbutton-library"}
         active={true}
         action={()=>{
-          service.api.redirectTo("/sites/last");
+          history.push('/sites/last')
         }}
         title="Site Library"
         icon={AppsIcon}

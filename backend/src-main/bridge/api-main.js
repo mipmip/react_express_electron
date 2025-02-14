@@ -356,8 +356,8 @@ api.getCurrentSiteKey = async function(_,context){
   context.resolve(global.currentSiteKey);
 }
 
-api.openSiteLibrary = async function(){
-  global.mainWM.closeSiteAndShowSelectSites();
+api.openSiteLibrary = async function(_, context){
+  context.resolve(await global.mainWM.closeSiteAndShowSelectSites());
 }
 
 api.showMenuBar = async function(){

@@ -186,9 +186,9 @@ class App extends React.Component{
 
     return (<Switch>
 
-      <Route path='/prefs' exact={false} render={ (props) => {
+      <Route path='/prefs' exact={false} render={ ({history}) => {
 
-        const sp = new URLSearchParams(props.location.search);
+        const sp = new URLSearchParams(history.location.search);
         let backurl = "/sites/last";
         if(sp.has("siteKey")){
           let siteKey = sp.get("siteKey");
@@ -198,7 +198,7 @@ class App extends React.Component{
           <ToolbarButton
             key={"back"}
             action={()=>{
-              service.api.redirectTo(backurl, true);
+              history.push(backurl, true);
             }}
             title="Back"
             icon={ArrowBackIcon}
@@ -209,7 +209,8 @@ class App extends React.Component{
           <ToolbarButton
             key={"toolbarbutton-library"}
             action={()=>{
-              service.api.redirectTo("/sites/last");
+              console.log('hallo')
+              history.push("/sites/last");
             }}
             title="Site Library"
             icon={AppsIcon}
@@ -219,7 +220,7 @@ class App extends React.Component{
             key="buttonPrefs"
             active={true}
             action={()=>{
-              service.api.redirectTo("/prefs");
+              history.push("/prefs");
             }}
             title="Preferences"
             icon={SettingsApplicationsIcon}

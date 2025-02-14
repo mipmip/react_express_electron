@@ -160,13 +160,13 @@ class WorkSpace extends React.Component{
     </Switch>);
   }
 
-  toolbarItemsLeft(siteKey, workspaceKey, activeButton){
+  toolbarItemsLeft(siteKey, workspaceKey, activeButton, history){
     return [
       <ToolbarButton
         key="buttonContent"
         active={(activeButton === "content" ? true : false)}
         action={()=>{
-          service.api.redirectTo(`/sites/${siteKey}/workspaces/${workspaceKey}`);
+          history.push(`/sites/${siteKey}/workspaces/${workspaceKey}`);
         }}
         title="Content"
         icon={LibraryBooksIcon}
@@ -175,7 +175,7 @@ class WorkSpace extends React.Component{
         key="buttonSync"
         active={(activeButton === "sync" ? true : false)}
         action={()=>{
-          service.api.redirectTo(`/sites/${siteKey}/workspaces/${workspaceKey}/sync/`);
+          history.push(`/sites/${siteKey}/workspaces/${workspaceKey}/sync/`);
         }}
         title="Sync"
         icon={SyncIcon}
@@ -187,7 +187,7 @@ class WorkSpace extends React.Component{
         key="buttonSiteConf"
         active={(activeButton === "tools" ? true : false)}
         action={()=>{
-          service.api.redirectTo(`/sites/${siteKey}/workspaces/${workspaceKey}/siteconf/general`);
+          history.push(`/sites/${siteKey}/workspaces/${workspaceKey}/siteconf/general`);
         }}
         title="Tools"
         icon={BuildIcon}
@@ -196,7 +196,7 @@ class WorkSpace extends React.Component{
     ];
   }
 
-  toolbarItemsRight(siteKey){
+  toolbarItemsRight(siteKey, history){
 
     return [
       <ToolbarButton
@@ -210,7 +210,9 @@ class WorkSpace extends React.Component{
       <ToolbarButton
         key="buttonLibrary"
         action={()=>{
-          service.api.openSiteLibrary();
+          service.api.openSiteLibrary().then(()=>{
+            history.push(`/sites/last`);
+          });
         }}
         title="Site Library"
         icon={AppsIcon}
@@ -218,7 +220,7 @@ class WorkSpace extends React.Component{
       <ToolbarButton
         key="buttonPrefs"
         action={()=>{
-          service.api.redirectTo(`/prefs/?siteKey=${siteKey}`);
+          history.push(`/prefs/?siteKey=${siteKey}`);
         }}
         title="Preferences"
         icon={SettingsApplicationsIcon}
@@ -257,19 +259,19 @@ class WorkSpace extends React.Component{
 
     return (<Switch>
 
-      <Route path='/sites/:site/workspaces/:workspace/siteconf' render={ ({match})=> {
+      <Route path='/sites/:site/workspaces/:workspace/siteconf' render={ ({match, history})=> {
         const siteKey= decodeURIComponent(match.params.site);
         const workspaceKey= decodeURIComponent(match.params.workspace);
         return <TopToolbarRight
 
           key="toolbar-right-workspace-siteconf"
-          itemsLeft={this.toolbarItemsLeft(siteKey, workspaceKey, "tools")}
+          itemsLeft={this.toolbarItemsLeft(siteKey, workspaceKey, "tools", history)}
           itemsCenter={[]}
-          itemsRight={this.toolbarItemsRight(siteKey)}
+          itemsRight={this.toolbarItemsRight(siteKey, history)}
         />
       }} />
 
-      <Route path='/sites/:site/workspaces/:workspace/sync' render={ ({match})=> {
+      <Route path='/sites/:site/workspaces/:workspace/sync' render={ ({match,history})=> {
         const siteKey= decodeURIComponent(match.params.site);
         const workspaceKey= decodeURIComponent(match.params.workspace);
         const toolbarItemsCenter = [
@@ -278,13 +280,13 @@ class WorkSpace extends React.Component{
 
         return <TopToolbarRight
           key="toolbar-right-workspace-dashboard"
-          itemsLeft={this.toolbarItemsLeft(siteKey, workspaceKey, "sync")}
+          itemsLeft={this.toolbarItemsLeft(siteKey, workspaceKey, "sync", history)}
           itemsCenter={toolbarItemsCenter}
-          itemsRight={this.toolbarItemsRight(siteKey)}
+          itemsRight={this.toolbarItemsRight(siteKey, history)}
         />
       }} />
 
-      <Route path='/sites/:site/workspaces/:workspace' render={ ({match})=> {
+      <Route path='/sites/:site/workspaces/:workspace' render={ ({match, history})=> {
         const siteKey= decodeURIComponent(match.params.site);
         const workspaceKey= decodeURIComponent(match.params.workspace);
         const toolbarItemsCenter = [
@@ -293,9 +295,9 @@ class WorkSpace extends React.Component{
 
         return <TopToolbarRight
           key="toolbar-right-workspace-dashboard"
-          itemsLeft={this.toolbarItemsLeft(siteKey, workspaceKey, "content")}
+          itemsLeft={this.toolbarItemsLeft(siteKey, workspaceKey, "content", history)}
           itemsCenter={toolbarItemsCenter}
-          itemsRight={this.toolbarItemsRight(siteKey)}
+          itemsRight={this.toolbarItemsRight(siteKey, history)}
         />
       }} />
 

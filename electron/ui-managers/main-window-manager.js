@@ -275,9 +275,9 @@ module.exports = {
     return mainWindow;
   },
 
-  closeSiteAndShowSelectSites: function(){
+  closeSiteAndShowSelectSites: async function(){
     global.pogoconf.setLastOpenedSite(null, null, null);
-    global.pogoconf.saveState().then( ()=>{
+    await global.pogoconf.saveState().then( ()=>{
       global.currentSitePath = null;
       global.currentSiteKey = null;
       global.currentWorkspaceKey = null;
@@ -286,9 +286,10 @@ module.exports = {
       mainWindow.webContents.send("redirectToGivenLocation", '/sites/last');
 
       mainWindow.setTitle("Quiqr: Select site");
+      menuManager.createMainMenu();
     });
+    return true;
 
-    menuManager.createMainMenu();
   },
 
   remountSite: function(){

@@ -24,7 +24,7 @@ global.currentFormNodePath = undefined;
 global.currentFormAccordionIndex = undefined;
 
 global.currentWorkspaceKey = pogoconf.lastOpenedSite.workspaceKey;
-global.skipWelcomeScreen = pogoconf.skipWelcomeScreen;
+//global.skipWelcomeScreen = pogoconf.skipWelcomeScreen;
 global.hugoServer = undefined;
 global.currentServerProccess = undefined;
 global.logWindow;

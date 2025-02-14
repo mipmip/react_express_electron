@@ -33,9 +33,12 @@ class SyncBusyDialog extends React.Component{
   }
 
   componentDidMount(){
+    //PORTQUIQR
+    /*
     window.require('electron').ipcRenderer.on('updateProgress',(event, infoTxt, percent)=>{
       this.setState({infoTxt: infoTxt});
     });
+    */
   }
 
   render(){

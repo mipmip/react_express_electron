@@ -30,13 +30,31 @@ open url: http://localhost:4001/sites
 
 ## Long list of small and large todo's
 
+- [x] top iconbar actions not working
+- [ ] log Window not working
+
 - [ ] background jobs not working
 - [ ] collections not working
-- [ ] top iconbar actions not working
 - [ ] electron progress popup not correctly visible
 - [ ] templates gallery not working
 - [ ] ugly red warning at electron startup
 - [ ] pipeline build failing
-- [ ] log Window not working
 - [ ] menu-> File->select sites not working
 - [ ] repo should be renamed
+
+## Webserver alternative/extra functions
+
+- [ ] in main screen log window
+- [ ] login screen
+- [ ] disable stuff like preferences
+
+## Cleanups/Refactors
+
+- [ ] package.json remove unused 
+- [ ] package.json upgrade old npms
+- [ ] backend remove unused js files
+- [ ] backend/electron upgrade to TS
+- [ ] frontend upgrade to TS
+- [ ] frontend upgrade to latest React
+- [ ] move frontend files up
+- [ ] move backend files up
