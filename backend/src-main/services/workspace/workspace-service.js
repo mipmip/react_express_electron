@@ -15,7 +15,7 @@ const HugoBuilder                     = require('./../../hugo/hugo-builder');
 const HugoServer                      = require('./../../hugo/hugo-server');
 const HugoConfig                      = require('./../../hugo/hugo-config');
 const DocumentBuildAction             = require('./../../build-actions/document-build-action');
-const screenshotWindow                = require('./../../ui-managers/screenshot-window-manager');
+const screenshotWindow                = require('./../../../../electron/ui-managers/screenshot-window-manager');
 
 const workspaceConfigProvider = new WorkspaceConfigProvider();
 
@@ -353,15 +353,10 @@ class WorkspaceService{
         //globExpression = path.join(folder, `${subDirStars}!(_index).{${supportedContentExt.join(',')}}`);
         globExpression = path.join(folder, `${subDirStars}/!(_index).{${supportedContentExt.join(',')}}`);
       }
-      /*
-      else{
-        globExpression = path.join(folder, `${subDirStars}/*.{${supportedContentExt.join(',')}}`);
-      }
-      */
 
-    console.log('tothier')
+      //let files = await glob(globExpression, {});
 
-      let files = await globJob(globExpression, {});
+      let files = await promisify(glob)(globExpression, {});
       let retFiles = files.map(function(item){
 
         let key = item.replace(folder,'').replace(/^\//,'');
@@ -386,7 +381,10 @@ class WorkspaceService{
     }
     else{ //data folder and everything else
       let globExpression = path.join(folder, `**/*.{${formatProviderResolver.allFormatsExt().join(',')}}`);
-      let files = await globJob(globExpression, {});
+
+      //let files = await glob(globExpression, {});
+      let files = await promisify(glob)(globExpression, {});
+      //let files = await globJob(globExpression, {});
       return files.map(function(item){
         let key = item.replace(folder,'');
         return {key, label:key};
@@ -471,14 +469,6 @@ class WorkspaceService{
     });
     let pathInLang = collection.folder.slice(sourcelang.source.length);
 
-//    console.log(sourcelang, 'sourcelang')
-//    console.log(pathInLang, 'pathInLang')
-//    console.log(destlang, 'destlang')
-//
-//    console.log(langs);
-//    console.log(this.workspacePath);
-//    console.log(collection.folder);
-//    console.log(destLangCode);
 
     let filePath = path.join(this.workspacePath, collection.folder, collectionItemKey);
 
@@ -493,9 +483,6 @@ class WorkspaceService{
       newLabel = collectionItemNewKey;
     }
 
-//    console.log(filePath);
-//    console.log(newFilePath);
-//    console.log(newLabel);
 
     if (!fs.existsSync(filePath)){
       console.log("orig does not exist"+ filePath)
@@ -842,7 +829,11 @@ class WorkspaceService{
 
       if(!thumbSrcExists){
         try{
-          await createThumbnailJob(completePath, thumbSrc);
+          await createThumbnailJob(completePath, thumbSrc)
+          .then(()=>{})
+          .catch((e)=>{
+            console.log('ERROR: ' + e.stdout.toString());
+          });
         }
         catch(e){
           return 'NOT_FOUND';

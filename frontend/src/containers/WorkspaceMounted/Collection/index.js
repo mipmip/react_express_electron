@@ -262,7 +262,6 @@ class Collection extends React.Component{
       Promise.all([
         service.api.listCollectionItems(siteKey, workspaceKey, collectionKey).then((items)=>{
           stateUpdate.items = items;
-          service.api.logToConsole(items)
           stateUpdate = { ...stateUpdate, ...(this.resolveFilteredItems(items)) };
 
         }),

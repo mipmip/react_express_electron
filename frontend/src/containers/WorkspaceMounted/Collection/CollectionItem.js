@@ -17,9 +17,7 @@ class CollectionItem extends React.Component{
   }
 
   componentDidMount(){
-    window.require('electron').ipcRenderer.on('frontEndBusy', ()=>{
-      this.setState({showSpinner: true});
-    });
+
     service.registerListener(this);
 
     var stateUpdate  = {};

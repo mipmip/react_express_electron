@@ -436,6 +436,7 @@ class App extends React.Component{
 
   render() {
 
+
     let menuContainerStyle = this.state.style.menuContainer;
     let contentContainerStyle = this.state.style.contentContainer;
     let welcomeScreen = this.renderWelcomeScreen();
@@ -532,9 +533,15 @@ class App extends React.Component{
           */}
 
       <Route path="/" exact={true} render={ ({match, history})=> {
-          this.history = history;
-          return this.renderBodyWithToolbars()
-        }} />
+        this.history = history;
+
+        const sp = new URLSearchParams(history.location.search);
+        if(sp.has("console")){
+          history.push("/console");
+        }
+
+        return this.renderBodyWithToolbars()
+      }} />
 
       <Route path="/sites" exact={true} render={ ({match, history})=> {
           this.history = history;

@@ -1,4 +1,5 @@
 const electron                  = require('electron');
+const windowStateKeeper         = require('electron-window-state');
 const BrowserWindow             = electron.BrowserWindow;
 const url                       = require('url')
 const path                      = require('path')
@@ -6,92 +7,20 @@ const fs                        = require('fs-extra')
 
 let logWindow;
 
-function showNotFound(logWindow/*: any*/, lookups/*: Array<string>*/){
-  let lookupsHtml = lookups.map((x)=> `<li>${x}</li>`).join('');
-  logWindow.loadURL("data:text/html;charset=utf-8," + encodeURIComponent(`<html>
-<body style="font-family: sans-serif; padding: 2em">
-    <h1>Oops...</h1>
-    <p>The file <b>index.html</b> was not found!</p>
-    <p>We tried the following paths:</p>
-    <ul>${lookupsHtml}</ul>
-</body>
-</html>`));
-}
+const isDev = process.env.NODE_ENV === "development";
+let mainWindow;
+let mainWindowState;
 
+function getLocation(){
 
-function showLookingForServer(logWindow/*: any*/, port/*: string*/){
-  logWindow.loadURL("data:text/html;charset=utf-8," + encodeURIComponent(`<html>
-<body style="font-family: sans-serif; padding: 2em">
-<h1>Waiting for Development Server</h1>
-<p>Waiting for React development server in port ${port}...</p>
-<p>Have you started it?</p>
-</body>
-</html>`));
-}
-
-function showInvalidDevelopmentUrl(logWindow/*: any*/, url/*: ?string*/){
-  logWindow.loadURL("data:text/html;charset=utf-8," + encodeURIComponent(`<html>
-<body style="font-family: sans-serif; padding: 2em">
-<h1>Invalid Development Server URL</h1>
-<p>The provided URL (${url||'EMPTY'}) does not match the required pattern.</p>
-<p>Please, fix this and try again.</p>
-</body>
-</html>`));
-}
-
-function createWindow () {
-  // Create the browser window.
-  logWindow = new BrowserWindow({
-    show: false,
-    webPreferences: {
-      nodeIntegration: true,
-    },
-    frame: true,
-    backgroundColor:"#ffffff",
-    minWidth:1024,
-  });
-
-  logWindow.setMenuBarVisibility(false);
-
-  logWindow.show();
-
-  logWindow.setTitle("Quiqr Log");
-
-  if(process.env.REACT_DEV_URL){
-
-    //DEVELOPMENT SERVER
-
-    //let url = process.env.REACT_DEV_URL+'/console';
-    let url = process.env.REACT_DEV_URL;
-    //console.log(url)
-    const urlWithPortMatch = url.match(/:([0-9]{4})/);
-    if(urlWithPortMatch==null){
-      showInvalidDevelopmentUrl(url);
-    }
-    else{
-      let port = urlWithPortMatch[1];
-      showLookingForServer(logWindow, port);
-
-      const net = require('net');
-      const client = new net.Socket();
-      const tryConnection = () => client.connect({port: port}, () => {
-        client.end();
-        if(logWindow) logWindow.loadURL(url);
-      }
-      );
-      client.on('error', () => {
-        setTimeout(tryConnection, 1000);
-      });
-      tryConnection();
-    }
-  }
-  else{
-
-    //LOOKING FOR INDEX.HTML
+  if (isDev) {
+    mainWindow.loadURL("http://localhost:4001/console"); // For development
+  } else {
 
     let lookups = [
-      path.normalize(path.join(__dirname, '/../../index.html')), //works in production
-      path.normalize(path.join(__dirname, '../../build/index.html')) //works in development after react_build
+      path.join(__dirname, "../dist/frontend/console.html"),
+      path.normalize(path.join(__dirname, '/../../console.html')), //works in production
+      path.normalize(path.join(__dirname, '../frontend/build/console.html')), //works in development after react_build
     ];
 
     let indexFile = null;
@@ -102,20 +31,53 @@ function createWindow () {
         break;
       }
     }
-    if(indexFile){
-      logWindow.loadURL(
-        url.format({ pathname: indexFile, protocol: 'file:', slashes: true })
-      );
-    }
-    else{
-      showNotFound(logWindow, lookups);
-    }
+
+    let myUrl = url.format(
+      { pathname: indexFile+"?console=true", protocol: 'file:', slashes: true });
+
+    mainWindow.loadURL(myUrl);
+  }
+}
+
+function createWindow () {
+
+  mainWindowState = windowStateKeeper({
+    defaultWidth: 800,
+    defaultHeight: 600
+  });
+
+  mainWindow = new BrowserWindow({
+    show: false,
+    frame: true,
+    backgroundColor:"#ffffff",
+    webPreferences: {
+      nodeIntegration: true,
+    },
+    x: mainWindowState.x,
+    y: mainWindowState.y,
+    width: mainWindowState.width,
+    height: mainWindowState.height,
+    minWidth: 1055,
+    minHeight: 700,
+
+  });
+
+  mainWindowState.manage(mainWindow);
+
+  if(process.env.DEVTOOLS){
+    let devtools = new BrowserWindow()
+    mainWindow.webContents.setDevToolsWebContents(devtools.webContents)
+    mainWindow.webContents.openDevTools({ mode: 'detach' })
   }
 
-  logWindow.on('closed', function () {
-    logWindow = undefined; //clear reference
+  getLocation();
+  mainWindow.show();
+
+  mainWindow.on('closed', function () {
+    mainWindow = undefined; //clear reference
   })
 
+  /*
   var handleRedirect = (e, url) => {
     if(!/\/\/localhost/.test(url)) {
       e.preventDefault()
@@ -123,9 +85,12 @@ function createWindow () {
     }
   }
 
-  logWindow.webContents.on('will-navigate', handleRedirect);
-  logWindow.webContents.on('new-window', handleRedirect);
+  mainWindow.webContents.on('will-navigate', handleRedirect);
+  mainWindow.webContents.on('new-window', handleRedirect);
+  */
+
 }
+
 
 module.exports = {
   getCurrentInstance: function(){

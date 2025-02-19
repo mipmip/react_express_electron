@@ -441,7 +441,7 @@ class Form extends React.Component {
 
         return (
           <Button
-            key={"buildButton"+build_action}
+            key={"buildButton"+build_action.key}
             onClick={()=>{this.handleDocBuild(build_action.key);}}
             style={{marginRight:'5px'}}
             size="small"

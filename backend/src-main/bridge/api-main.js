@@ -5,7 +5,8 @@ const {dirname}                 = require('path');
 const path                      = require('path');
 const {shell}                   = require('electron');
 const util                      = require('util')
-const logWindowManager          = require('../ui-managers/log-window-manager');
+const logWindowManager          = require('../../../electron/ui-managers/log-window-manager');
+const menuManager               = require('../../../electron/ui-managers/menu-manager');
 const pathHelper                = require('../utils/path-helper');
 const formatProviderResolver    = require('../utils/format-provider-resolver');
 const configurationDataProvider = require('../app-prefs-state/configuration-data-provider')
@@ -14,7 +15,6 @@ const libraryService            = require('../services/library/library-service')
 const Embgit                    = require('../embgit/embgit')
 const WorkspaceService          = require('../services/workspace/workspace-service')
 const hugoDownloader            = require('../hugo/hugo-downloader')
-const menuManager               = require('../ui-managers/menu-manager');
 const pogozipper                = require('../import-export/pogozipper');
 const gitImporter               = require('../import/git-importer');
 const folderImporter            = require('../import/folder-importer');
@@ -543,9 +543,11 @@ api.stopHugoServer = function(){
 api.showLogWindow = function(){
   global.logWindow = logWindowManager.getCurrentInstanceOrNew();
 
+  /*
   global.logWindow.webContents.on('did-finish-load',() => {
     global.logWindow.webContents.send("redirectToGivenLocation", "/console")
   })
+  */
 
 }
 
@@ -855,7 +857,6 @@ api.openCustomCommand = function({command}, promise){
       }
     });
 
-  console.log(command)
   promise.resolve();
 }
 api.hugosite_dir_show = function({folder}, promise){

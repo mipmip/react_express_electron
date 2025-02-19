@@ -4,7 +4,6 @@ const url                            = require('url')
 const path                           = require('path')
 const fs                             = require('fs-extra')
 const menuManager                    = require('./menu-manager');
-const configurationDataProvider      = require('../../backend/src-main/app-prefs-state/configuration-data-provider')
 
 const isDev = process.env.NODE_ENV === "development";
 let mainWindow;

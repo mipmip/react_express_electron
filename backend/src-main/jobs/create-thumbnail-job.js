@@ -26,8 +26,6 @@ const action  = async ({src , dest}) => {
             });
           }
         });
-
-
       });
 
       await resizePromise;
@@ -37,7 +35,7 @@ const action  = async ({src , dest}) => {
       fs.exists(dest,(exists)=> resolve(exists));
     });
 
-    let thumbExists = await thumbExistsPromise;
+    let thumbExists = await thumbExistsPromise();
     if(!thumbExists){
       throw new Error('Something went wrong');
     }
