@@ -1,5 +1,8 @@
 import axios from "axios";
 
+axios.defaults.timeout = 30000
+axios.defaults.timeoutErrorMessage='timeout'
+
 export type AbortablePromise<T> = Promise<T> & { forceAbort: ()=>void };
 
 class MainProcessBridge{
@@ -85,7 +88,7 @@ class MainProcessBridge{
 
   }
 
-  request( method, data, opts = {timeout:10000}){
+  request( method, data, opts = {timeout:90000}){
     //console.log(method);
     let _reject;
     let promise = new Promise((resolve, reject)=>{

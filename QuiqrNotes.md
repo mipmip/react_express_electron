@@ -31,13 +31,21 @@ open url: http://localhost:4001/sites
 ## Long list of small and large todo's
 
 - [x] top iconbar actions not working
+- [x] collections not working
+- [x] ugly red warning at electron startup
 - [ ] log Window not working
 
-- [ ] background jobs not working
-- [ ] collections not working
+- [ ] performance is slow (maybe swith with ipc and express)
+- [ ] after a while axios or express is not working anymore. Complete application Crash
+    - [ ] seems to be causes by not able to stop hugo server
+    - [ ] axios timeout settings seems to fix this a bit
+
+axios.defaults.timeout = 30000
+axios.defaults.timeoutErrorMessage='timeout'
+
+- [ ] background jobs not working (thumbnail not ported yet)
 - [ ] electron progress popup not correctly visible
 - [ ] templates gallery not working
-- [ ] ugly red warning at electron startup
 - [ ] pipeline build failing
 - [ ] menu-> File->select sites not working
 - [ ] repo should be renamed
