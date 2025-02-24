@@ -15,7 +15,7 @@
   "main": "electron/main.js",
   "scripts": {
     "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:electron\"",
-    "dev:frontend": "cd frontend && XSKIP_PREFLIGHT_CHECK=true NODE_OPTIONS=--openssl-legacy-provider npm run dev",
+    "dev:frontend": "cd frontend && SKIP_PREFLIGHT_CHECK=true NODE_OPTIONS=--openssl-legacy-provider npm run dev",
     "dev:electron": "cross-env NODE_ENV=development electron .",
     "build": "npm run build:frontend && electron-builder",
     "build:frontend": "cd frontend && NODE_OPTIONS=--openssl-legacy-provider npm run build",
