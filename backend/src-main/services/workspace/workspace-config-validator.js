@@ -23,28 +23,28 @@ class WorkspaceConfigValidator {
 
     this.normalizeConfig(config);
 
-    let validationError = joi.validate(config,
-      joi.object().keys({
-        hugover: joi.string().trim().required(),
-        menu: joi.array(),
-        collections: joi.array().required(),
-        singles: joi.array().required(),
-        dynamics: joi.array(),
+    const schema = joi.object().keys({
+      hugover: joi.string().trim().required(),
+      menu: joi.array(),
+      collections: joi.array().required(),
+      singles: joi.array().required(),
+      dynamics: joi.array(),
 
-        //partials: joi.array(), //FOR NOW BACKWARDS COMPATIBITY SOON UNCOMMENT BELOW
-        // partials: joi.any().forbidden().error(new Error('the main key partials is obsolete. Use dynamics in stead')),
+      //partials: joi.array(), //FOR NOW BACKWARDS COMPATIBITY SOON UNCOMMENT BELOW
+      // partials: joi.any().forbidden().error(new Error('the main key partials is obsolete. Use dynamics in stead')),
 
-        build: joi.array().items(joi.object().keys({
-          key:joi.string(),
-          config:joi.string().required()
-        })),
-        serve: joi.array().items(joi.object().keys({
-          key:joi.string(),
-          config:joi.string().required(),
-          hugoHidePreviewSite:joi.boolean()
-        }))
-      }).required()
-    ).error;
+      build: joi.array().items(joi.object().keys({
+        key:joi.string(),
+        config:joi.string().required()
+      })),
+      serve: joi.array().items(joi.object().keys({
+        key:joi.string(),
+        config:joi.string().required(),
+        hugoHidePreviewSite:joi.boolean()
+      }))
+    }).required()
+
+    let validationError = schema.validate(config).error;
 
     if(validationError) return validationError.message;
 
@@ -86,12 +86,11 @@ class WorkspaceConfigValidator {
 
     let validationError = null;
 
-    validationError = joi.validate(collection, joi.object().required().error(new Error('The collection configuration is required.'))).error;
+    const schemacol1 = joi.object().required().error(new Error('The collection configuration is required.'));
+    validationError = schemacol1.validate(collection).error;
     if(validationError) return validationError.message;
 
-    // VALIDATE ALL FIELDS COMMON TO CONTENT OR DATA FILES
-    validationError = joi.validate(collection,
-      joi.object().keys({
+    const schemacol2 = joi.object().keys({
         key: joi.string().trim().regex(/^[A-Za-z0-9\-_]+$/i).min(3).max(90).required().error(new Error('The collection key "'+collection.key+'" is invalid.')),
         title: joi.string().trim().min(3).max(30).required().error(new Error('The collection.title value is invalid.')),
         description: joi.string().trim().max(90).error(new Error('The collection.description value is invalid.'+JSON.stringify(collection))),
@@ -108,16 +107,19 @@ class WorkspaceConfigValidator {
         fields: joi.array().min(1).required().error(new Error("The fields value is invalid.\n"+JSON.stringify(collection))),
         sortkey: joi.string().trim().min(3).error(new Error('The sortkey value is invalid.')),
       })
-    ).error;
+
+    // VALIDATE ALL FIELDS COMMON TO CONTENT OR DATA FILES
+    validationError = schemacol2.validate(collection).error;
+
 
     if(validationError) return validationError.message;
 
     if(validationUtils.contentFormatReg.test(collection.extension)){
 
       // WITH CONTENT FILES, DATA FORMAT IS REQUIRED
-      validationError = joi.validate(collection.dataformat,
-        joi.string().regex(validationUtils.dataFormatReg).required().error(new Error('The dataformat value is invalid.'))
-      ).error;
+      const schemacol3 = joi.string().regex(validationUtils.dataFormatReg).required().error(new Error('The dataformat value is invalid.'))
+
+      validationError = schemacol3.validate(collection.dataformat).error;
 
       if(validationError) return validationError.message;
     }
@@ -136,12 +138,12 @@ class WorkspaceConfigValidator {
 
     let validationError = null;
 
-    validationError = joi.validate(single, joi.object().required().error(new Error('The single configuration is required.'))).error;
+    const schemasingle1 = joi.object().required().error(new Error('The single configuration is required.'));
+    validationError = schemasingle1.validate(single).error;
     if(validationError) return validationError.message;
 
     //validate all fields common to content or data files
-    validationError = joi.validate(single,
-      joi.object().keys({
+    const schemasingle2 = joi.object().keys({
         key: joi.string().trim().regex(/^[A-Za-z0-9\-_]+$/i).min(3).max(90).required().error(new Error('The single key "'+single.key+'" is invalid.')),
         title: joi.string().trim().min(3).max(30).required().error(new Error('The singles.title value is invalid.'+JSON.stringify(single))),
         description: joi.string().trim().max(90).error(new Error('The singles.description value is invalid.'+JSON.stringify(single))),
@@ -156,16 +158,17 @@ class WorkspaceConfigValidator {
         fields: joi.array().min(1).required().error(new Error('The singles.fields value is invalid.')),
         _mergePartial: joi.any().forbidden().error(new Error('The singles.mergePartial value could not be parsed. Check file paths'))
       })
-    ).error;
+
+    validationError = schemasingle2.validate(single).error;
 
     if(validationError) return validationError.message;
 
     let extension = path.extname(single.file).replace('.','');
     if(single.file.startsWith('content') || single.file.startsWith('quiqr/home')){
       //content file, dataformat must be provided
-      validationError = joi.validate(single.dataformat,
-        joi.string().trim().regex(validationUtils.dataFormatReg).required().error(new Error('The dataformat value is invalid.'))
-      ).error;
+      const schemasingle3 = joi.string().trim().regex(validationUtils.dataFormatReg).required().error(new Error('The dataformat value is invalid.'))
+
+      validationError = schemasingle3.validate(single.dataformat).error;
 
       if(validationError) return validationError.message;
     }

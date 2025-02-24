@@ -15,6 +15,7 @@ function validateSite(site) {
   if(site==null){
     throw new Error(`Site config can't be null.`);
   }
+
   const schema = Joi.object().keys({
     key: Joi.string().required(),
     name: Joi.string().required(),
@@ -42,7 +43,7 @@ function validateSite(site) {
     transform: Joi.array()
 
   });
-  const result = Joi.validate(site, schema);
+  const result = schema.validate(site);
   if(result.error)
     throw result.error;
 }
