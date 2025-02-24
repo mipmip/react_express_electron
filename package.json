@@ -97,6 +97,7 @@
       "dist/**/*",
       "frontend/build/**/*",
       "electron/**/*",
+      "resources/**/*",
       "backend/**/*",
       "backend/server.js"
     ],
