@@ -145,3 +145,31 @@ dist
 .yarn/install-state.gz
 .pnp.*
 frontend/build
+
+# See https://help.github.com/ignore-files/ for more about ignoring files.
+
+# production
+/build
+/dist
+
+# misc
+.DS_Store
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.swp
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+/somefile.log
+/public/ace-editor-min-noconflict
+/resources/all/build-git-id.txt
+/resources/all/build-date.txt
+resources/linux/embgit
+resources/mac/embgit
+resources/win/embgit.exe
+.temp.html
+.temp.seed
