@@ -5,15 +5,15 @@
   "description": "Sandbox repo for a react frontend, node backend, packaged as an electron app.",
   "main": "electron/main.js",
   "scripts": {
-    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\" \"npm run dev:electron\"",
-    "dev2": "concurrently  \"npm run dev:backend\" \"npm run dev:electron\"",
-    "dev:react": "cross-env APP_ENV=development BROWSERSLIST_IGNORE_OLD_DATA=true BROWSER=none PORT=4001 react-scripts start",
+    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:electron\"",
     "dev:frontend": "cd frontend && SKIP_PREFLIGHT_CHECK=true NODE_OPTIONS=--openssl-legacy-provider npm run dev",
-    "dev:frontend-old": "cd frontend && vite",
     "dev:electron": "cross-env NODE_ENV=development electron .",
     "build": "npm run build:frontend && electron-builder",
-    "build:react": "cross-env BROWSERSLIST_IGNORE_OLD_DATA=true react-scripts build",
-    "build:frontend": "cd frontend && npm run build"
+    "build:frontend": "cd frontend && npm run build",
+    "devold:frontend-old": "cd frontend && vite",
+    "devold": "concurrently  \"npm run dev:backend\" \"npm run dev:electron\"",
+    "devold:react": "cross-env APP_ENV=development BROWSERSLIST_IGNORE_OLD_DATA=true BROWSER=none PORT=4001 react-scripts start",
+    "buildold:react": "cross-env BROWSERSLIST_IGNORE_OLD_DATA=true react-scripts build"
   },
   "keywords": [],
   "author": "Roy Russo <royrusso@gmail.com> (https://royrusso.com)",
@@ -41,7 +41,6 @@
     "jsonfile": "^6.1.0",
     "mkdirp": "0.5.1",
     "node-fetch": "^2.6.11",
-    "nodemon": "^3.1.9",
     "openai": "^4.64.0",
     "prop-types": "^15.8.1",
     "request": "2.87.0",
@@ -51,15 +50,20 @@
     "ws": "^8.18.0"
   },
   "devDependencies": {
+    "concurrently": "^9.1.2",
+    "electron": "^25.3.0",
+    "electron-builder": "^24.6.0"
+  },
+  "disabledDeps":{
+    "nodemon": "^3.1.9"
+  },
+  "disabledDevDeps":{
+    "webpack": "^5.97.1",
+    "webpack-cli": "^6.0.1",
     "@babel/core": "^7.26.7",
     "@babel/preset-react": "^7.26.3",
     "babel-loader": "^9.2.1",
-    "concurrently": "^9.1.2",
-    "electron": "^25.3.0",
-    "electron-builder": "^24.6.0",
-    "vite": "^6.0.11",
-    "webpack": "^5.97.1",
-    "webpack-cli": "^6.0.1"
+    "vite": "^6.0.11"
   },
   "build": {
     "appId": "com.example.viteapp",
