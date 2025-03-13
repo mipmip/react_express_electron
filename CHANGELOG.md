@@ -1,4 +1,6 @@
 # Quiqr App CHANGELOG
+## **WORK IN PROGRESS**
+
 ## 0.21.1 (2025-02-24)
 - fix: cleanups in package.jsons
 - fix: add scripts
